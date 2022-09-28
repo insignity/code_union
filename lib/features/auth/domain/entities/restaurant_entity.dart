@@ -1,4 +1,11 @@
-class RestaurantEntity {
+import 'package:equatable/equatable.dart';
+
+import 'coords_entity.dart';
+import 'image_entity.dart';
+import 'schedule_entity.dart';
+import 'user_entity.dart';
+
+class RestaurantEntity extends Equatable {
   final int id;
   final bool isFavorite;
   final String title;
@@ -6,12 +13,12 @@ class RestaurantEntity {
   final int scheduleId;
   final int coordsId;
   final int userId;
-  final Schedule schedule;
-  final Coords coords;
-  final List<Image> images;
-  final User user;
+  final ScheduleEntity? schedule;
+  final CoordsEntity? coords;
+  final List<ImageEntity>? images;
+  final UserEntity? user;
 
-  RestaurantEntity({
+  const RestaurantEntity({
     required this.schedule,
     required this.coords,
     required this.images,
@@ -24,54 +31,20 @@ class RestaurantEntity {
     required this.coordsId,
     required this.userId,
   });
+
+  @override
+  List<Object?> get props => [
+        schedule,
+        coords,
+        images,
+        user,
+        id,
+        isFavorite,
+        title,
+        description,
+        scheduleId,
+        coordsId,
+        userId,
+      ];
 }
 
-class Schedule {
-  final int id;
-  final DateTime opening;
-  final DateTime closing;
-
-  Schedule({
-    required this.id,
-    required this.opening,
-    required this.closing,
-  });
-}
-
-class Coords {
-  final int id;
-  final double longitude;
-  final double latitude;
-  final String addressName;
-
-  Coords({
-    required this.id,
-    required this.longitude,
-    required this.latitude,
-    required this.addressName,
-  });
-}
-
-class Image {
-  final int id;
-  final String url;
-  final int restaurantId;
-
-  Image({
-    required this.id,
-    required this.url,
-    required this.restaurantId,
-  });
-}
-
-class User {
-  final int id;
-  final String email;
-  final String nickname;
-
-  User({
-    required this.id,
-    required this.email,
-    required this.nickname,
-  });
-}
